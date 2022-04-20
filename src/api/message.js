@@ -1,20 +1,20 @@
 import request from '@/utils/request'
 import { getToken } from '@/utils/auth'
 
-export function getAdminMessageList(query) {
+export function getReceiveMessageList(query) {
   return request({
-    url: '/admin/message/admin/list',
+    url: '/teacher/message/receive',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 
 export function sendMessage(query) {
   return request({
-    url: '/admin/message/send',
+    url: '/teacher/message/send',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'

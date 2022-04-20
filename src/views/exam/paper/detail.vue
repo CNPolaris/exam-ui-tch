@@ -36,6 +36,7 @@
 <script>
 import { selectExamPaper } from '@/api/exam'
 import QuestionShow from '../../question/components/Show'
+import {mapActions, mapGetters, mapState} from "vuex";
 
 export default {
   components: { QuestionShow },
@@ -86,17 +87,30 @@ export default {
       subjectFilter: null
     }
   },
-  created() {
+  async created() {
     const id = this.$route.query.id
     const _this = this
-    this.initSubject(function() {
+    await this.initSubject(function() {
       _this.subjectFilter = _this.subjects
     })
     if (id && parseInt(id) !== 0) {
-      selectExamPaper(id).then(re => {
-        _this.form = re.data
+      await selectExamPaper(id).then(re => {
+        // _this.form = re.data
+        Object.assign(_this.form, re.data)
       })
     }
+  },
+  methods: {
+    ...mapActions('exam', { initSubject: 'initSubject' })
+  },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionTypeEnum: state => state.exam.question.typeEnum,
+      paperTypeEnum: state => state.exam.examPaper.paperTypeEnum,
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

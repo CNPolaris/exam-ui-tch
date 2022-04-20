@@ -3,11 +3,11 @@
     <div>
       <el-row :gutter="20">
 
-        <el-col :span="6" :xs="24">
+        <el-col :span="8" :xs="24">
           <user-card :user-info="userInfo" />
         </el-col>
 
-        <el-col :span="18" :xs="24">
+        <el-col :span="16" :xs="24">
           <el-card>
             <el-tabs active-name="timeline">
               <el-tab-pane label="时间线" name="timeline">

@@ -3,33 +3,34 @@
     <div slot="header" className="clearfix">
       <span>关于我</span>
     </div>
-
-    <div className="user-profile">
-      <div className="box-center" @click="handleShow">
-        <img
-          :src="userInfo.avatar"
-          height="100px"
-          width="100px"
-          style="border-radius: 50px"
-        >
-      </div>
-      <div className="box-center">
-        <div className="user-name text-center">{{ userInfo.userName }}</div>
-        <div className="user-role text-center text-muted">{{ enumFormat(roleEnum, userInfo.role) }}</div>
-      </div>
-    </div>
-
-    <div className="user-bio">
-      <div className="user-education user-bio-section">
-        <div className="user-bio-section-header">
-          <svg-icon icon-class="education" />
-          <span>个人简介</span></div>
-        <div className="user-bio-section-body">
-          <div className="text-muted">
-            无
+    <el-row>
+      <el-col :span="8">
+        <div className="user-profile">
+          <div className="box-center" @click="handleShow">
+            <img
+              :src="userInfo.avatar"
+              height="100px"
+              width="100px"
+              style="border-radius: 50px"
+            >
           </div>
         </div>
-      </div>
+      </el-col>
+      <el-col :span="16">
+        <div className="user-education user-bio-section">
+          <div className="user-bio-section-header">
+            <svg-icon icon-class="education" />
+            <span>个人简介</span>
+          </div>
+          <div className="user-bio-section-body">
+            <div className="text-muted">
+              <span>姓名: {{ userInfo.realName }}</span>
+            </div>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+    <div className="user-bio">
       <el-dialog
         title="上传头像"
         :visible.sync="uploadDialogVisible"

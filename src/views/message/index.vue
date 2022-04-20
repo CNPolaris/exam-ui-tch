@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form ref="queryForm" :model="queryParam" :inline="true">
       <el-form-item label="发送者用户名：">
-        <el-input v-model="queryParam.send" />
+        <el-input v-model="queryParam.sendUserName" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">查询</el-button>
@@ -33,7 +33,7 @@
 
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
-import { getAdminMessageList } from '@/api/message'
+import { getReceiveMessageList } from '@/api/message'
 
 export default {
   components: { Pagination },
@@ -47,7 +47,7 @@ export default {
       queryParam: {
         page: 1,
         limit: 10,
-        send: ''
+        sendUserName: ''
       }
     }
   },
@@ -57,9 +57,9 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      getAdminMessageList(this.queryParam).then(response => {
+      getReceiveMessageList(this.queryParam).then(response => {
         const { data } = response
-        this.list = data.data
+        this.list = data.list
         this.total = data.total
         this.listLoading = false
       })

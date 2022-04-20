@@ -59,7 +59,7 @@ export function createExamPaper(data) {
 
 export function selectExamPaper(id) {
   return request({
-    url: '/admin/exam/select/' + id,
+    url: '/teacher/exam/select/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

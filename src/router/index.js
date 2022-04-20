@@ -55,11 +55,14 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard/index',
+    meta: {
+      icon: 'dashboard'
+    },
     children: [
       {
         path: '/dashboard/index',
         component: () => import('@/views/dashboard/index'),
-        name: 'AdminDash',
+        name: 'Dashboard',
         meta: {
           title: '首页',
           affix: true,
@@ -93,7 +96,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+        meta: { title: '个人详情', icon: 'user', noCache: true }
       }
     ]
   },
@@ -201,7 +204,7 @@ export const asyncRoutes = [
     name: 'exam',
     meta: {
       title: '卷库管理',
-      icon: 'form',
+      icon: 'education',
       roles: ['admin', 'teacher']
     },
     children: [
@@ -241,6 +244,7 @@ export const asyncRoutes = [
     name: 'answer',
     meta: {
       title: '答卷管理',
+      icon: 'form',
       roles: ['admin', 'teacher']
     },
     children: [
