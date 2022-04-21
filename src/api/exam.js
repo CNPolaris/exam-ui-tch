@@ -109,3 +109,13 @@ export function submitJudge(query) {
     data: query
   })
 }
+
+export function getPaperByClassId(id) {
+  return request({
+    url: '/teacher/exam/paper/class/' + id,
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'get'
+  })
+}

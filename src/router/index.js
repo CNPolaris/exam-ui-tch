@@ -249,24 +249,25 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: '/exam/answer/list',
+        path: '/exam/answer/record/list',
         component: () => import('@/views/exam/answer/list'),
         meta: {
-          title: '批改列表'
+          title: '考试记录'
         }
       },
       {
-        path: '/exam/answer/complete',
-        component: () => import('@/views/exam/answer/complete'),
-        meta: {
-          title: '批改完成'
-        }
-      },
-      {
-        path: '/exam/answer/judge',
-        component: () => import('@/views/exam/answer/judge'),
+        path: '/exam/answer/edit',
+        component: () => import('@/views/exam/answer/edit'),
         meta: {
           title: '阅卷'
+        },
+        hidden: true
+      },
+      {
+        path: '/exam/answer/read',
+        component: () => import('@/views/exam/answer/read'),
+        meta: {
+          title: '查看答卷'
         },
         hidden: true
       }
