@@ -252,7 +252,14 @@ export const asyncRoutes = [
         path: '/exam/answer/record/list',
         component: () => import('@/views/exam/answer/list'),
         meta: {
-          title: '考试记录'
+          title: '未批改'
+        }
+      },
+      {
+        path: '/exam/answer/complete/list',
+        component: () => import('@/views/exam/answer/complete'),
+        meta: {
+          title: '已完成'
         }
       },
       {

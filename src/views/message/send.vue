@@ -87,7 +87,7 @@ export default {
     },
     handleCheckChange(item) {
       getClassMessage(item.id).then(re => {
-        for (let i = 0; i< re.data.length; i++) {
+        for (let i = 0; i < re.data.length; i++) {
           this.form.receiveUserIds.push(re.data[i])
         }
       })
