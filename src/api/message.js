@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getReceiveMessageList(query) {
   return request({
-    url: '/teacher/message/receive',
+    url: '/teacher/message/send/history',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

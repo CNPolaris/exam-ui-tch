@@ -8,7 +8,7 @@
       <el-form-item label="内容：" prop="content" required>
         <el-input v-model="form.content" type="textarea" rows="13" />
       </el-form-item>
-      <el-form-item label="接收人：" required>
+      <el-form-item label="接收人：">
         <el-select
           v-model="form.receiveUserIds"
           multiple
@@ -22,6 +22,11 @@
           <el-option v-for="item in options" :key="item.value" :label="item.name" :value="item.value" />
         </el-select>
       </el-form-item>
+      <el-form-item label="班级消息：">
+        <el-col v-for="item in allClasses" :key="item.id" :span="8">
+          <el-checkbox v-model="item.checked" @change="handleCheckChange(item)">{{ item.className }}</el-checkbox>
+        </el-col>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">发送</el-button>
         <el-button @click="resetForm">重置</el-button>
@@ -34,6 +39,7 @@
 import { mapActions } from 'vuex'
 import { selectByUsername } from '@/api/user'
 import { sendMessage } from '@/api/message'
+import { getClassList, getClassMessage } from '@/api/classes'
 
 export default {
   data() {
@@ -46,6 +52,7 @@ export default {
       formLoading: false,
       selectLoading: false,
       options: [],
+      allClasses: [],
       rules: {
         title: [
           { required: true, message: '请输入消息标题', trigger: 'blur' }
@@ -57,6 +64,13 @@ export default {
     }
   },
   created() {
+    const _this = this
+    getClassList().then(re => {
+      _this.allClasses = re.data
+      for (let i = 0; i < _this.allClasses.length; i++) {
+        _this.allClasses[i].checked = false
+      }
+    })
   },
   methods: {
     getUserByUserName(query) {
@@ -70,6 +84,14 @@ export default {
       } else {
         _this.options = []
       }
+    },
+    handleCheckChange(item) {
+      getClassMessage(item.id).then(re => {
+        for (let i = 0; i< re.data.length; i++) {
+          this.form.receiveUserIds.push(re.data[i])
+        }
+      })
+      this.$forceUpdate()
     },
     submitForm() {
       const _this = this

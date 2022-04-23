@@ -54,3 +54,13 @@ export function editClass(query) {
     data: query
   })
 }
+
+export function getClassMessage(id) {
+  return request({
+    url: '/teacher/class/message/student/' + id,
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'get'
+  })
+}

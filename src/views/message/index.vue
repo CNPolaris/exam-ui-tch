@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form ref="queryForm" :model="queryParam" :inline="true">
-      <el-form-item label="发送者用户名：">
+      <el-form-item label="接收者用户名：">
         <el-input v-model="queryParam.sendUserName" />
       </el-form-item>
       <el-form-item>

@@ -4,12 +4,12 @@
       <el-form :model="queryParam" :inline="true">
         <el-form-item label="班级" prop="classId">
           <el-select v-model="tempClass" placeholder="班级" @change="getClassPaper">
-            <el-option v-for="item in classes" :key="item.id" :label="item.className" :value="item.id"/>
+            <el-option v-for="item in classes" :key="item.id" :label="item.className" :value="item.id" />
           </el-select>
         </el-form-item>
         <el-form-item label="试卷" prop="paperId" :hidden="showVisible">
             <el-select v-model="queryParam.paperId" placeholder="学科">
-              <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id"/>
+              <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
         </el-form-item>
         <el-form-item>
@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Pagination from '@/components/Pagination'
 import { getStudentRecordList } from '@/api/record'
-import { getClassList } from "@/api/classes"
+import { getClassList } from '@/api/classes'
 import { scrollTo } from '@/utils/scroll-to'
 import { formatDate } from '@/utils/date'
-import { getPaperByClassId } from "@/api/exam"
+import { getPaperByClassId } from '@/api/exam'
 
 export default {
   name: 'Record',
@@ -104,8 +104,8 @@ export default {
       listLoading: false,
       tableData: [],
       tempClass: null,
-      classes:[],
-      classPaper:[],
+      classes: [],
+      classPaper: [],
       total: 0,
       selectItem: {
         systemScore: '0',
@@ -119,7 +119,7 @@ export default {
     }
   },
   async created() {
-    const _this =this
+    const _this = this
     await this.initSubject()
     await getClassList().then(re => {
       _this.classes = re.data
@@ -128,9 +128,9 @@ export default {
     scrollTo(0, 800)
   },
   methods: {
-    getClassPaper(){
+    getClassPaper() {
       const _this = this
-      getPaperByClassId(this.tempClass).then(re =>{
+      getPaperByClassId(this.tempClass).then(re => {
         _this.classPaper = re.data
       })
       _this.showVisible = false
