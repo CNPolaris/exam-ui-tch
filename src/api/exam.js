@@ -119,3 +119,14 @@ export function getPaperByClassId(id) {
     method: 'get'
   })
 }
+
+export function getResultPaper(data) {
+  return request({
+    url: '/teacher/exam/result/list',
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'post',
+    data: data
+  })
+}

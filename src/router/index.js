@@ -281,6 +281,23 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/exam/result',
+    component: Layout,
+    name: 'result',
+    meta: {
+      title: '成绩管理'
+    },
+    children: [
+      {
+        path: '/exam/result/index',
+        component: () => import('@/views/exam/result/index'),
+        meta: {
+          title: '成绩分析'
+        }
+      }
+    ]
+  },
+  {
     path: '/video',
     component: Layout,
     meta: {
