@@ -24,6 +24,9 @@
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             编辑
           </el-button>
+          <el-button type="primary" size="mini" @click="$router.push({ path: '/exam/result/index', query: { id: row.id }})">
+            成绩分析
+          </el-button>
         </template>
       </el-table-column>
 

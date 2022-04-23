@@ -1,5 +1,30 @@
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-form :model="queryParam" :inline="true">
+        <el-form-item label="试卷ID：">
+          <el-input v-model="queryParam.id" style="width: 100px" />
+        </el-form-item>
+        <el-form-item label="年级" prop="level">
+          <el-select v-model="queryParam.level" placeholder="年级" clearable style="width: 100px">
+            <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="班级">
+          <el-select v-model="queryParam.classId" placeholder="班级" style="width: 100px">
+            <el-option v-for="item in allClasses" :key="item.id" value="item.id" :label="item.className" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="学科" prop="subjectId">
+          <el-select v-model="queryParam.subjectId" placeholder="学科" style="width: 100px">
+            <el-option v-for="item in subjects" :key="item.id" :label="item.name" :value="item.id" />
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="getList">查询</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     <el-table :data="list" border fit highlight-current-row style="width: 100%;">
       <el-table-column label="编号" prop="id" sortable="custom" align="center" width="80" />
 
@@ -18,6 +43,8 @@
         <el-button>成绩分析</el-button>
       </el-table-column>
     </el-table>
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" />
+
   </div>
 </template>
 
@@ -42,7 +69,8 @@ export default {
         page: 1,
         limit: 10,
         level: null,
-        subjectId: null
+        subjectId: null,
+        classId: null
       },
       subjectFilter: null,
       allClasses: []
@@ -50,6 +78,7 @@ export default {
   },
   async created() {
     const _this = this
+    this.queryParam.classId = this.$route.query.id
     await this.initSubject(function() {
       _this.subjectFilter = _this.subjects
     })
