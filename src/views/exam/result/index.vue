@@ -28,22 +28,25 @@
     <el-table :data="list" border fit highlight-current-row style="width: 100%;">
       <el-table-column label="编号" prop="id" sortable="custom" align="center" width="80" />
 
-      <el-table-column prop="name" align="center" label="名称" width="267" />
+      <el-table-column prop="name" align="center" label="名称" width="260" />
 
-      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="353" />
+      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="210" />
 
-      <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="353" />
+      <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="210" />
 
-      <el-table-column prop="paperType" :formatter="examPaperTypeFormatter" align="center" label="试卷类型" width="397" />
+      <el-table-column prop="paperType" :formatter="examPaperTypeFormatter" align="center" label="试卷类型" width="220" />
 
-      <el-table-column prop="createUser" align="center" label="创建者" width="353" />
+      <el-table-column prop="createUser" align="center" label="创建者" width="230" />
 
-      <el-table-column prop="createTime" :formatter="formatDateTime" align="center" label="创建时间" width="353" />
+      <el-table-column prop="createTime" :formatter="formatDateTime" align="center" label="创建时间" width="250" />
       <el-table-column label="操作">
-        <el-button>成绩分析</el-button>
+        <template slot-scope="{row}">
+          <el-button size="mini">成绩分析</el-button>
+          <el-button size="mini" @click="$router.push({ path:'/exam/detail', query:{ id:row.id}})">查看原卷</el-button>
+        </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" align="center"/>
 
   </div>
 </template>

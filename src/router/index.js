@@ -252,6 +252,7 @@ export const asyncRoutes = [
         path: '/exam/answer/record/list',
         component: () => import('@/views/exam/answer/list'),
         meta: {
+          icon: 'el-icon-close',
           title: '未批改'
         }
       },
@@ -259,6 +260,7 @@ export const asyncRoutes = [
         path: '/exam/answer/complete/list',
         component: () => import('@/views/exam/answer/complete'),
         meta: {
+          icon: 'el-icon-check',
           title: '已完成'
         }
       },
@@ -285,6 +287,7 @@ export const asyncRoutes = [
     component: Layout,
     name: 'result',
     meta: {
+      icon: 'el-icon-s-data',
       title: '成绩管理'
     },
     children: [
