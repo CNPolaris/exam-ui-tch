@@ -3,7 +3,7 @@
     <el-row>
       <el-tabs v-model="activeName">
         <el-tab-pane label="考生成绩" name="first">
-          <el-row>
+          <el-row style="border-top-width: 10px">
             <el-form :inline="true">
               <el-form-item label="选择班级：">
                 <el-select v-model="queryParam.classId" placeholder="班级" style="width: 100px" @change="getClassPaper">
@@ -17,8 +17,58 @@
               </el-form-item>
             </el-form>
           </el-row>
-          <el-row>
-            <el-table :hidden="showStudentResult" :data="studentResult" border fit highlight-current-row style="width: 100%;">
+          <el-row :hidden="showStudentResult" style="border-top-width: 10px;">
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">应参加人数</span><br>
+                <span>{{ statisticsInfo.shouldAttend }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">已参加人数</span><br>
+                <span>{{ statisticsInfo.attended }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">缺考人数</span><br>
+                <span>{{ statisticsInfo.shouldAttend - statisticsInfo.attended }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">及格人数</span><br>
+                <span>{{ statisticsInfo.passCount }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">不及格人数</span><br>
+                <span>{{ statisticsInfo.attended-statisticsInfo.passCount }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">最高分</span><br>
+                <span>{{ statisticsInfo.maxScore }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">最低分</span><br>
+                <span>{{ statisticsInfo.minScore }}</span>
+              </el-card>
+            </el-col>
+            <el-col :span="3">
+              <el-card align="center" style="height: 80px; width: 150px">
+                <span class="statistics-font" style="width: 20px">平均分</span><br>
+                <span>{{ statisticsInfo.avgScore }}</span>
+              </el-card>
+            </el-col>
+          </el-row>
+
+            <el-table :hidden="showStudentResult" :data="studentResult" border fit highlight-current-row style="border-top-width: 10px;width: 100%;">
               <el-table-column prop="userAccount" align="center" label="账号" width="200" />
               <el-table-column prop="userName" align="center" label="姓名" width="200" />
               <el-table-column align="center" label="提交时间" width="200">
@@ -51,10 +101,7 @@
               </el-table-column>
             </el-table>
             <pagination v-show="studentResultTotal>0" :total="studentResultTotal" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getStudentResult" />
-          </el-row>
-        </el-tab-pane>
-        <el-tab-pane label="人工评卷">
-          人工评卷
+
         </el-tab-pane>
         <el-tab-pane label="成绩统计">
           成绩统计
@@ -75,7 +122,7 @@ import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { getClassList } from '@/api/classes'
 import { getPaperByClassId } from '@/api/exam'
-import { getStudentResultPage } from '@/api/analysis'
+import { getStudentResultPage, getStatisticsInfo } from '@/api/analysis'
 import { formatDate } from '@/utils/date'
 
 export default {
@@ -102,11 +149,20 @@ export default {
         page: 1,
         limit: 10,
         classId: null,
-        paperId: null
+        paperId: null,
+        date: null
       },
       studentResultTotal: 0,
       studentResult: [],
-      classPaper: []
+      classPaper: [],
+      statisticsInfo: {
+        shouldAttend: 0,
+        attended: 0,
+        avgScore: 0,
+        maxScore: 0,
+        minScore: 0,
+        passCount: 0
+      }
     }
   },
   async created() {
@@ -137,12 +193,15 @@ export default {
         _this.studentResult = data.list
         _this.studentResultTotal = data.total
         _this.studentResult.sort(this.compare('userScore'))
-
         for (let i = 0; i < _this.studentResult.length; i++) {
           _this.studentResult[i].correctRate = Math.round(_this.studentResult[i].questionCorrect / _this.studentResult[i].questionCount * 10000) / 100.00 + '%'
           _this.studentResult[i].isPass = _this.studentResult[i].userScore >= _this.studentResult[i].paperScore
+          _this.studentResult[i].isPass = _this.studentResult[i].userScore >= _this.studentResult[i].paperScore * 0.6
           _this.studentResult[i].order = i + 1
         }
+      })
+      getStatisticsInfo(this.queryParam).then(re => {
+        _this.statisticsInfo = re.data
       })
       this.showStudentResult = false
     },
@@ -165,5 +224,9 @@ export default {
 </script>
 
 <style scoped>
+.statistics-font {
+  font-size: 10px;
+  color: gray;
+}
 
 </style>

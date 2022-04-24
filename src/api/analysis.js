@@ -12,3 +12,15 @@ export function getStudentResultPage(data) {
     data: data
   })
 }
+
+export function getStatisticsInfo(data) {
+  return request({
+    url: '/exam/analysis/statistics',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    data: data
+  })
+}
