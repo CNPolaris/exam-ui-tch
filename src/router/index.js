@@ -271,16 +271,16 @@ export const asyncRoutes = [
           title: '阅卷'
         },
         hidden: true
-      },
-      {
-        path: '/exam/answer/read',
-        component: () => import('@/views/exam/answer/read'),
-        meta: {
-          title: '查看答卷'
-        },
-        hidden: true
       }
     ]
+  },
+  {
+    path: '/exam/answer/read',
+    component: () => import('@/views/exam/answer/read'),
+    meta: {
+      title: '查看答卷'
+    },
+    hidden: true
   },
   {
     path: '/exam/result',
@@ -296,6 +296,13 @@ export const asyncRoutes = [
         component: () => import('@/views/exam/result/index'),
         meta: {
           title: '成绩分析'
+        }
+      },
+      {
+        path: '/exam/result/analyze',
+        component: () => import('@/views/exam/result/analyze'),
+        meta: {
+          title: '详细分析'
         }
       }
     ]

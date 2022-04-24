@@ -64,3 +64,13 @@ export function getClassMessage(id) {
     method: 'get'
   })
 }
+
+export function getClassByPaperId(id) {
+  return request({
+    url: '/teacher/class/analyse/list/' + id,
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'get'
+  })
+}

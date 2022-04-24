@@ -20,7 +20,7 @@
             <el-option v-for="item in subjects" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
-        <el-form-item>
+        <el-form-item label="操作">
           <el-button type="primary" @click="getList">查询</el-button>
         </el-form-item>
       </el-form>
@@ -41,12 +41,12 @@
       <el-table-column prop="createTime" :formatter="formatDateTime" align="center" label="创建时间" width="250" />
       <el-table-column label="操作">
         <template slot-scope="{row}">
-          <el-button size="mini">成绩分析</el-button>
+          <el-button size="mini" @click="$router.push({ path: '/exam/result/analyze', query: { id: row.id}})">成绩分析</el-button>
           <el-button size="mini" @click="$router.push({ path:'/exam/detail', query:{ id:row.id}})">查看原卷</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" align="center"/>
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" />
 
   </div>
 </template>
