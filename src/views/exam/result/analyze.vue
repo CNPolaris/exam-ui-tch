@@ -1,6 +1,6 @@
 <template>
-  <div class="app-container">
-    <el-row>
+  <div class="dashboard-container">
+    <el-row :gutter="40">
       <el-tabs v-model="activeName">
         <el-tab-pane label="考生成绩" name="first">
           <el-row style="border-top-width: 10px">
@@ -17,90 +17,146 @@
               </el-form-item>
             </el-form>
           </el-row>
-          <el-row :hidden="showStudentResult" style="border-top-width: 10px;">
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">应参加人数</span><br>
-                <span>{{ statisticsInfo.shouldAttend }}</span>
-              </el-card>
+          <el-row :gutter="40" class="panel-group" :hidden="showStudentResult">
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="shouldAttend" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    应参加人数
+                  </div>
+                  <count-to :start-val="0" :end-val="statisticsInfo.shouldAttend" :duration="2600" class="card-panel-num" align="center" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">已参加人数</span><br>
-                <span>{{ statisticsInfo.attended }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="attended" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    已参加人数
+                  </div>
+                  <count-to :start-val="0" :end-val="statisticsInfo.attended" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">缺考人数</span><br>
-                <span>{{ statisticsInfo.shouldAttend - statisticsInfo.attended }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="unAttended" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    缺考人数
+                  </div>
+                  <count-to :start-val="0" :end-val="statisticsInfo.shouldAttend - statisticsInfo.attended" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">及格人数</span><br>
-                <span>{{ statisticsInfo.passCount }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="passCount" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    及格人数
+                  </div>
+                  <count-to :start-val="0" :end-val="statisticsInfo.passCount" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">不及格人数</span><br>
-                <span>{{ statisticsInfo.attended-statisticsInfo.passCount }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="unPass" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    不及格人数
+                  </div>
+                  <count-to :start-val="0" :end-val="statisticsInfo.attended - statisticsInfo.passCount" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">最高分</span><br>
-                <span>{{ statisticsInfo.maxScore }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="maxScore" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    最高分
+                  </div>
+                  <count-to :start-val="statisticsInfo.maxScore" :end-val="statisticsInfo.maxScore" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">最低分</span><br>
-                <span>{{ statisticsInfo.minScore }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="minScore" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    最低分
+                  </div>
+                  <count-to :start-val="statisticsInfo.minScore" :end-val="statisticsInfo.minScore" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
-            <el-col :span="3">
-              <el-card align="center" style="height: 80px; width: 150px">
-                <span class="statistics-font" style="width: 20px">平均分</span><br>
-                <span>{{ statisticsInfo.avgScore }}</span>
-              </el-card>
+            <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
+              <div class="card-panel">
+                <div class="card-panel-icon-wrapper">
+                  <svg-icon icon-class="avgScore" class-name="card-panel-icon" />
+                </div>
+                <div class="card-panel-description">
+                  <div class="card-panel-text">
+                    平均分
+                  </div>
+                  <count-to :start-val="statisticsInfo.avgScore" :end-val="statisticsInfo.avgScore" :duration="2600" class="card-panel-num" />
+                </div>
+              </div>
             </el-col>
           </el-row>
 
-            <el-table :hidden="showStudentResult" :data="studentResult" border fit highlight-current-row style="border-top-width: 10px;width: 100%;">
-              <el-table-column prop="userAccount" align="center" label="账号" width="200" />
-              <el-table-column prop="userName" align="center" label="姓名" width="200" />
-              <el-table-column align="center" label="提交时间" width="200">
-                <template slot-scope="{row}">
-                  {{ row.createTime|formatDateTime }}
-                </template>
-              </el-table-column>
-              <el-table-column prop="doTime" align="center" label="答题时间" width="150" />
-              <el-table-column align="center" label="总分/及格分">
-                <template slot-scope="{row}">
-                  {{ row.paperScore }}/{{ row.paperScore*0.6 }}
-                </template>
-              </el-table-column>
-              <el-table-column prop="userScore" align="center" label="成绩" />
-              <el-table-column prop="correctRate" align="center" label="正确率" />
-              <el-table-column align="center" label="及格">
-                <template slot-scope="{row}">
-                  <el-tag :type="passTagFormatter(row.isPass)">
-                    {{ passTextFormatter(row.isPass) }}
-                  </el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column prop="order" label="排名" />
-              <el-table-column label="操作">
-                <template slot-scope="{row}">
-                  <router-link target="_blank" :to="{path:'/exam/answer/read',query:{id:row.id}}">
-                    <el-button type="text" size="small">查看答卷</el-button>
-                  </router-link>
-                </template>
-              </el-table-column>
-            </el-table>
-            <pagination v-show="studentResultTotal>0" :total="studentResultTotal" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getStudentResult" />
+          <el-table :hidden="showStudentResult" :data="studentResult" border fit highlight-current-row style="width: 100%;">
+            <el-table-column prop="userAccount" align="center" label="账号" width="200" />
+            <el-table-column prop="userName" align="center" label="姓名" width="200" />
+            <el-table-column align="center" label="提交时间" width="200">
+              <template slot-scope="{row}">
+                {{ row.createTime|formatDateTime }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="doTime" align="center" label="答题时间" width="150" />
+            <el-table-column align="center" label="总分/及格分">
+              <template slot-scope="{row}">
+                {{ row.paperScore }}/{{ row.paperScore*0.6 }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="userScore" align="center" label="成绩" />
+            <el-table-column prop="correctRate" align="center" label="正确率" />
+            <el-table-column align="center" label="及格">
+              <template slot-scope="{row}">
+                <el-tag :type="passTagFormatter(row.isPass)">
+                  {{ passTextFormatter(row.isPass) }}
+                </el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column prop="order" label="排名" />
+            <el-table-column label="操作">
+              <template slot-scope="{row}">
+                <router-link target="_blank" :to="{path:'/exam/answer/read',query:{id:row.id}}">
+                  <el-button type="text" size="small">查看答卷</el-button>
+                </router-link>
+              </template>
+            </el-table-column>
+          </el-table>
+          <pagination v-show="studentResultTotal>0" :total="studentResultTotal" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getStudentResult" />
 
         </el-tab-pane>
         <el-tab-pane label="成绩统计">
@@ -120,6 +176,8 @@
 <script>
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
+import CountTo from 'vue-count-to'
+import resize from '@/views/dashboard/components/mixins/resize'
 import { getClassList } from '@/api/classes'
 import { getPaperByClassId } from '@/api/exam'
 import { getStudentResultPage, getStatisticsInfo } from '@/api/analysis'
@@ -127,8 +185,6 @@ import { formatDate } from '@/utils/date'
 
 export default {
   name: 'Analyze',
-  components: { Pagination },
-  directives: { waves },
   filters: {
     formatDateTime(time) {
       if (time == null || time === '') {
@@ -138,6 +194,9 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     }
   },
+  directives: { waves },
+  components: { Pagination, CountTo },
+  mixins: [resize],
   data() {
     return {
       showStudentResult: true,
@@ -197,7 +256,7 @@ export default {
           _this.studentResult[i].correctRate = Math.round(_this.studentResult[i].questionCorrect / _this.studentResult[i].questionCount * 10000) / 100.00 + '%'
           _this.studentResult[i].isPass = _this.studentResult[i].userScore >= _this.studentResult[i].paperScore
           _this.studentResult[i].isPass = _this.studentResult[i].userScore >= _this.studentResult[i].paperScore * 0.6
-          _this.studentResult[i].order = i + 1
+          _this.studentResult[i].order = (_this.queryParam.page - 1) * _this.queryParam.limit + i + 1
         }
       })
       getStatisticsInfo(this.queryParam).then(re => {

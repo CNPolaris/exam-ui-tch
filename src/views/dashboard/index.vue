@@ -4,62 +4,62 @@
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-people">
-            <svg-icon icon-class="tree" class-name="card-panel-icon"/>
+            <svg-icon icon-class="tree" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
               班级总数
             </div>
-            <count-to :start-val="0" :end-val="form.classCount" :duration="2600" class="card-panel-num" v-loading="loading"/>
+            <count-to v-loading="loading" :start-val="0" :end-val="form.classCount" :duration="2600" class="card-panel-num" />
           </div>
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-        <div class="card-panel" >
+        <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-message">
-            <svg-icon icon-class="user" class-name="card-panel-icon"/>
+            <svg-icon icon-class="user" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
               学生总数
             </div>
-            <count-to :start-val="0" :end-val="form.studentCount" :duration="3000" class="card-panel-num" v-loading="loading"/>
+            <count-to v-loading="loading" :start-val="0" :end-val="form.studentCount" :duration="3000" class="card-panel-num" />
           </div>
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-shopping">
-            <svg-icon icon-class="doexampaper" class-name="card-panel-icon"/>
+            <svg-icon icon-class="doexampaper" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
               试卷总数
             </div>
-            <count-to :start-val="0" :end-val="form.examPaperCount" :duration="3600" class="card-panel-num" v-loading="loading"/>
+            <count-to v-loading="loading" :start-val="0" :end-val="form.examPaperCount" :duration="3600" class="card-panel-num" />
           </div>
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-money">
-            <svg-icon icon-class="doquestion" class-name="card-panel-icon"/>
+            <svg-icon icon-class="doquestion" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
               题目总数
             </div>
-            <count-to :start-val="0" :end-val="form.questionCount" :duration="3200" class="card-panel-num" v-loading="loading"/>
+            <count-to v-loading="loading" :start-val="0" :end-val="form.questionCount" :duration="3200" class="card-panel-num" />
           </div>
         </div>
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="12" >
-          <div class="chart-wrapper" id="echarts-class-pie" style="width: 100%;height:400px;" v-loading="loading"/>
+      <el-col :span="12">
+        <div id="echarts-class-pie" v-loading="loading" class="chart-wrapper" style="width: 100%;height:400px;" />
       </el-col>
       <el-col :span="12">
-          <div class="chart-wrapper" id="echarts-paper-pie" style="width: 100%;height:400px;" v-loading="loading"/>
+        <div id="echarts-paper-pie" v-loading="loading" class="chart-wrapper" style="width: 100%;height:400px;" />
       </el-col>
     </el-row>
 
@@ -70,14 +70,13 @@
 import resize from './components/mixins/resize'
 import CountTo from 'vue-count-to'
 import { dashInfo } from '@/api/dashboard'
-import ClassUserPie from "@/views/dashboard/components/ClassUserPie"
-import echarts from "echarts";
+import echarts from 'echarts'
 export default {
-  mixins: [resize],
-  components: {
-    CountTo, ClassUserPie
-  },
   name: 'Dashboard',
+  components: {
+    CountTo
+  },
+  mixins: [resize],
   data() {
     return {
       loading: false,
@@ -86,29 +85,30 @@ export default {
         questionCount: 0,
         classCount: 0,
         studentCount: 0,
-        classPaperPie:[],
-        classUserPie:[]
+        classPaperPie: [],
+        classUserPie: []
       },
       echartsClassUserAction: null,
       echartsClassPaperAction: null
     }
   },
   mounted() {
-    this.echartsClassUserAction = echarts.init(document.getElementById('echarts-class-pie'), 'macarons')
-    this.echartsClassPaperAction = echarts.init(document.getElementById('echarts-paper-pie'), 'macarons')
-    this.loading = true
+    const _this = this
+    _this.echartsClassUserAction = echarts.init(document.getElementById('echarts-class-pie'), 'macarons')
+    _this.echartsClassPaperAction = echarts.init(document.getElementById('echarts-paper-pie'), 'macarons')
+    _this.loading = true
     dashInfo().then(re => {
-      this.form.classCount = re.data.classCount
-      this.form.studentCount = re.data.studentCount
-      this.form.examPaperCount = re.data.examPaperCount
-      this.form.questionCount = re.data.questionCount
-      this.echartsClassUserAction.setOption(this.pieOption('班级人数分布',re.data.classUserPie))
-      this.echartsClassPaperAction.setOption(this.pieOption('班级试卷分布', re.data.classPaperPie))
-      this.loading = false
+      _this.form.classCount = re.data.classCount
+      _this.form.studentCount = re.data.studentCount
+      _this.form.examPaperCount = re.data.examPaperCount
+      _this.form.questionCount = re.data.questionCount
+      _this.echartsClassUserAction.setOption(_this.pieOption('班级人数分布', re.data.classUserPie))
+      _this.echartsClassPaperAction.setOption(_this.pieOption('班级试卷分布', re.data.classPaperPie))
+      _this.loading = false
     })
   },
   methods: {
-    pieOption (title, value) {
+    pieOption(title, value) {
       return {
         title: {
           text: title,
