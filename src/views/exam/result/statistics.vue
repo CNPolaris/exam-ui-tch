@@ -8,18 +8,19 @@
       </el-form-item>
     </el-form>
     <el-table :data="list">
-      <el-table-column prop="userName" label="帐户"/>
-      <el-table-column prop="realName" label="姓名"/>
-      <el-table-column prop="shouldAttendCount" label="应参与次数"/>
-      <el-table-column prop="attendCount" label="参与次数"/>
-      <el-table-column prop="attendRate" label="参与率"/>
-      <el-table-column prop="correctRate" label="正确率"/>
-      <el-table-column pro="maxScore" label="最高分"/>
-      <el-table-column prop="minScore" label="最低分"/>
-      <el-table-column prop="avgScore" label="平均分"/>
+      <el-table-column prop="userName" label="帐户" align="center"/>
+      <el-table-column prop="realName" label="姓名" align="center"/>
+      <el-table-column prop="shouldAttendCount" label="应参与次数" align="center"/>
+      <el-table-column prop="attendCount" label="参与次数" align="center"/>
+      <el-table-column prop="correctRate" label="正确率" align="center"/>
+      <el-table-column prop="passRate" label="及格率" align="center"/>
+      <el-table-column prop="maxScore" label="最高分" align="center"/>
+      <el-table-column prop="minScore" label="最低分" align="center"/>
+      <el-table-column prop="avgScore" label="平均分" align="center"/>
     </el-table>
     <pagination
       v-show="total>0"
+      align="center"
       :total="total"
       :page.sync="queryParam.page"
       :limit.sync="queryParam.limit"
@@ -34,7 +35,7 @@ import {getClassList} from '@/api/classes'
 import {getStatisticsStudent} from '@/api/analysis'
 
 export default {
-  name: 'statistics',
+  name: 'Statistics',
   directives: {waves},
   components: {Pagination},
   data() {
@@ -79,6 +80,11 @@ export default {
             _this.list[i].attendRate = Math.round(_this.list[i].attendCount / _this.list[i].shouldAttendCount * 10000) / 100.00 + '%'
           } else {
             _this.list[i].attendRate = 0
+          }
+          if (_this.list[i].attendCount !== 0) {
+            _this.list[i].passRate = Math.round(_this.list[i].passCount / _this.list[i].attendCount * 10000) / 100.00 + '%'
+          } else {
+            _this.list[i].passRate = 0
           }
         }
       })
