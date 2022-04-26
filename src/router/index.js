@@ -296,13 +296,14 @@ export const asyncRoutes = [
         component: () => import('@/views/exam/result/index'),
         meta: {
           title: '成绩分析'
-        }
+        },
+        hidden: true
       },
       {
         path: '/exam/result/analyze',
         component: () => import('@/views/exam/result/analyze'),
         meta: {
-          title: '详细分析'
+          title: '试卷分析'
         }
       }
     ]
