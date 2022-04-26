@@ -305,6 +305,13 @@ export const asyncRoutes = [
         meta: {
           title: '试卷分析'
         }
+      },
+      {
+        path: '/exam/result/statistics',
+        component: () => import('@/views/exam/result/statistics'),
+        meta: {
+          title: '考生统计'
+        }
       }
     ]
   },

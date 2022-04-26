@@ -24,3 +24,15 @@ export function getStatisticsInfo(data) {
     data: data
   })
 }
+
+export function getStatisticsStudent(data) {
+  return request({
+    url: '/exam/analysis/statistics/student',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    data: data
+  })
+}
