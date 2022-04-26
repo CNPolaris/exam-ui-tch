@@ -76,11 +76,6 @@ export default {
           } else {
             _this.list[i].correctRate = 0
           }
-          if (_this.list[i].shouldAttendCount !== 0) {
-            _this.list[i].attendRate = Math.round(_this.list[i].attendCount / _this.list[i].shouldAttendCount * 10000) / 100.00 + '%'
-          } else {
-            _this.list[i].attendRate = 0
-          }
           if (_this.list[i].attendCount !== 0) {
             _this.list[i].passRate = Math.round(_this.list[i].passCount / _this.list[i].attendCount * 10000) / 100.00 + '%'
           } else {

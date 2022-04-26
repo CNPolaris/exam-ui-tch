@@ -24,8 +24,12 @@
             <div class="card-panel-text">
               应参加人数
             </div>
-            <count-to :start-val="0" :end-val="statisticsInfo.shouldAttend" :duration="2600" class="card-panel-num"
-                      align="center"/>
+            <count-to
+              :start-val="0"
+              :end-val="statisticsInfo.shouldAttend"
+              :duration="2600"
+              class="card-panel-num"
+            />
           </div>
         </div>
       </el-col>
@@ -51,8 +55,11 @@
             <div class="card-panel-text">
               缺考人数
             </div>
-            <count-to :start-val="0" :end-val="statisticsInfo.shouldAttend - statisticsInfo.attended" :duration="2600"
-                      class="card-panel-num"/>
+            <count-to
+              :start-val="0"
+              :end-val="statisticsInfo.shouldAttend - statisticsInfo.attended"
+              :duration="2600"
+              class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -78,8 +85,11 @@
             <div class="card-panel-text">
               不及格人数
             </div>
-            <count-to :start-val="0" :end-val="statisticsInfo.attended - statisticsInfo.passCount" :duration="2600"
-                      class="card-panel-num"/>
+            <count-to
+              :start-val="0"
+              :end-val="statisticsInfo.attended - statisticsInfo.passCount"
+              :duration="2600"
+              class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -92,8 +102,11 @@
             <div class="card-panel-text">
               最高分
             </div>
-            <count-to :start-val="statisticsInfo.maxScore" :end-val="statisticsInfo.maxScore" :duration="2600"
-                      class="card-panel-num"/>
+            <count-to
+              :start-val="statisticsInfo.maxScore"
+              :end-val="statisticsInfo.maxScore"
+              :duration="2600"
+              class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -106,8 +119,11 @@
             <div class="card-panel-text">
               最低分
             </div>
-            <count-to :start-val="statisticsInfo.minScore" :end-val="statisticsInfo.minScore" :duration="2600"
-                      class="card-panel-num"/>
+            <count-to
+              :start-val="statisticsInfo.minScore"
+              :end-val="statisticsInfo.minScore"
+              :duration="2600"
+              class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -120,8 +136,11 @@
             <div class="card-panel-text">
               平均分
             </div>
-            <count-to :start-val="statisticsInfo.avgScore" :end-val="statisticsInfo.avgScore" :duration="2600"
-                      class="card-panel-num"/>
+            <count-to
+              :start-val="statisticsInfo.avgScore"
+              :end-val="statisticsInfo.avgScore"
+              :duration="2600"
+              class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -152,14 +171,18 @@
       <el-table-column prop="order" label="排名"/>
       <el-table-column label="操作">
         <template slot-scope="{row}">
-          <router-link target="_blank" :to="{path:'/exam/answer/read',query:{id:row.id}}">
+          <router-link target="_blank" :to="{ path:'/exam/answer/read', query:{ id: row.id } }">
             <el-button type="text" size="small">查看答卷</el-button>
           </router-link>
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="studentResultTotal>0" :total="studentResultTotal" :page.sync="queryParam.page"
-                :limit.sync="queryParam.limit" @pagination="getStudentResult"/>
+    <pagination
+      v-show="studentResultTotal>0"
+      :total="studentResultTotal"
+      :page.sync="queryParam.page"
+      :limit.sync="queryParam.limit"
+      @pagination="getStudentResult"/>
   </div>
 </template>
 
