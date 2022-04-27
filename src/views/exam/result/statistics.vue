@@ -7,7 +7,7 @@
         </el-select>
       </el-form-item>
     </el-form>
-    <el-table :data="list">
+    <el-table :data="list" fit highlight-current-row>
       <el-table-column prop="userName" label="帐户" align="center"/>
       <el-table-column prop="realName" label="姓名" align="center"/>
       <el-table-column prop="shouldAttendCount" label="应参与次数" align="center"/>
@@ -17,6 +17,18 @@
       <el-table-column prop="maxScore" label="最高分" align="center"/>
       <el-table-column prop="minScore" label="最低分" align="center"/>
       <el-table-column prop="avgScore" label="平均分" align="center"/>
+      <el-table-column label="操作" align="center">
+        <template slot-scope="{row}">
+          <router-link target="_blank" :to="
+            {
+              path:'/exam/student/detail',
+              query: { id: row.id }
+            }"
+          >
+            <el-button type="text" size="small">查看详细</el-button>
+          </router-link>
+        </template>
+      </el-table-column>
     </el-table>
     <pagination
       v-show="total>0"
@@ -36,7 +48,7 @@ import {getStatisticsStudent} from '@/api/analysis'
 
 export default {
   name: 'Statistics',
-  directives: {waves},
+  directives: { waves },
   components: {Pagination},
   data() {
     return {

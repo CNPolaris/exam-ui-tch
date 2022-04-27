@@ -248,7 +248,6 @@ export default {
       if (_this.classPaper.length > 0) {
         _this.queryParam.paperId = _this.classPaper[0].id
         _this.getStudentResult()
-        _this.getStatistics()
       }
     }
   },

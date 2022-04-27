@@ -33,6 +33,16 @@ export function logout() {
   })
 }
 
+export function getStudentInfo(id) {
+  return request({
+    url: '/user/info/' + id,
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'get'
+  })
+}
+
 export function getUserList(page, data) {
   return request({
     url: '/admin/user/list',

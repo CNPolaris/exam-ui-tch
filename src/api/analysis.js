@@ -36,3 +36,14 @@ export function getStatisticsStudent(data) {
     data: data
   })
 }
+
+export function getStudentAnswerList(id) {
+  return request({
+    url: '/student/analysis/result/' + id,
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    method: 'post'
+  })
+}

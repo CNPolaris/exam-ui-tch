@@ -122,13 +122,17 @@ export const asyncRoutes = [
     component: Layout,
     meta: {
       title: '班级管理',
-      icon: 'el-icon-user'
+      icon: 'el-icon-user',
+      roles: ['admin', 'teacher']
     },
     children: [
       {
         path: '/class/list',
         component: () => import('@/views/class/list'),
-        meta: { title: '班级列表' }
+        meta: {
+          title: '班级列表',
+          roles: ['admin', 'teacher']
+        }
       }
     ]
   },
@@ -278,7 +282,18 @@ export const asyncRoutes = [
     path: '/exam/answer/read',
     component: () => import('@/views/exam/answer/read'),
     meta: {
-      title: '查看答卷'
+      title: '查看答卷',
+      roles: ['admin', 'teacher']
+    },
+    hidden: true
+  },
+  {
+    path: '/exam/student/detail',
+    name: 'detail',
+    component: () => import('@/views/exam/result/detail'),
+    meta: {
+      title: '详情',
+      roles: ['admin', 'teacher']
     },
     hidden: true
   },
@@ -288,7 +303,8 @@ export const asyncRoutes = [
     name: 'result',
     meta: {
       icon: 'el-icon-s-data',
-      title: '成绩管理'
+      title: '成绩管理',
+      roles: ['admin', 'teacher']
     },
     children: [
       {
