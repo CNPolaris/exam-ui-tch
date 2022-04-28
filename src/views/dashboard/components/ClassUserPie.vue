@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height: height, width: width}"/>
+  <div :class="className" :style="{height: height, width: width}" />
 </template>
 
 <script>
@@ -14,8 +14,8 @@ export default {
       questionCount: 0,
       classCount: 0,
       studentCount: 0,
-      classPaperPie:[],
-      classUserPie:[]
+      classPaperPie: [],
+      classUserPie: []
     },
     className: {
       type: String,
@@ -53,11 +53,11 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.chart.setOption({
-        title:{
+        title: {
           text: '班级人数分布',
           left: 'center'
         },
-        tooltip:{
+        tooltip: {
           trigger: 'item'
         },
         legend: {

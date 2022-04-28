@@ -37,6 +37,13 @@ export default {
       visible: false
     }
   },
+  computed: {
+    ...mapState('enumItem', {
+      roleEnum: state => state.user.roleEnum,
+      levelEnum: state => state.user.levelEnum,
+      sexEnum: state => state.user.sexEnum
+    })
+  },
   methods: {
     submit_form() {
       this.dealExcel()
@@ -116,13 +123,6 @@ export default {
         }
       }
     }
-  },
-  computed: {
-    ...mapState('enumItem', {
-      roleEnum: state => state.user.roleEnum,
-      levelEnum: state => state.user.levelEnum,
-      sexEnum: state => state.user.sexEnum
-    })
   }
 }
 </script>

@@ -83,6 +83,14 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters('enumItem', [
+      'enumFormat'
+    ]),
+    ...mapState('enumItem', {
+      roleEnum: state => state.user.roleEnum
+    })
+  },
   methods: {
     handleShow() {
       this.tempAvatar = this.userInfo.avatar
@@ -145,14 +153,6 @@ export default {
       }
       return isJPG && isLt2M
     }
-  },
-  computed: {
-    ...mapGetters('enumItem', [
-      'enumFormat'
-    ]),
-    ...mapState('enumItem', {
-      roleEnum: state => state.user.roleEnum
-    })
   }
 }
 </script>

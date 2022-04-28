@@ -12,7 +12,8 @@ export default {
     value: {
       default: function() {
         return ''
-      }
+      },
+      type: Object
     }
   },
   data() {

@@ -8,9 +8,9 @@
           </el-select>
         </el-form-item>
         <el-form-item label="试卷" prop="paperId" :hidden="showVisible">
-            <el-select v-model="queryParam.paperId" placeholder="学科">
-              <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id" />
-            </el-select>
+          <el-select v-model="queryParam.paperId" placeholder="学科">
+            <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id" />
+          </el-select>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="search">
@@ -51,8 +51,8 @@
               <router-link v-if="row.status === 1 " target="_blank" :to="{path:'/exam/answer/read',query:{id:row.id}}">
                 <el-button type="text" size="small">查看答卷</el-button>
               </router-link>
-<!--              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/edit',query:{id:row.id}})">批改</el-button>-->
-<!--              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/read',query:{id:row.id}})">查看试卷</el-button>-->
+              <!--              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/edit',query:{id:row.id}})">批改</el-button>-->
+              <!--              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/read',query:{id:row.id}})">查看试卷</el-button>-->
             </template>
           </el-table-column>
         </el-table>
@@ -118,6 +118,23 @@ export default {
       subjectFilter: null
     }
   },
+  // eslint-disable-next-line vue/order-in-components
+  computed: {
+    ...mapGetters('enumItem', [
+      'enumFormat'
+    ]),
+    ...mapState('enumItem', {
+      statusEnum: state => state.exam.examPaperAnswer.statusEnum,
+      statusTag: state => state.exam.examPaperAnswer.statusTag
+    }),
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      levelEnum: state => state.user.levelEnum,
+      examPaperTypeEnum: state => state.exam.examPaper.paperTypeEnum
+    }),
+    ...mapGetters('exam', ['subjectEnumFormat']),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   async created() {
     const _this = this
     await this.initSubject()
@@ -154,23 +171,6 @@ export default {
       return this.enumFormat(this.statusEnum, status)
     },
     ...mapActions('exam', { initSubject: 'initSubject' })
-  },
-  // eslint-disable-next-line vue/order-in-components
-  computed: {
-    ...mapGetters('enumItem', [
-      'enumFormat'
-    ]),
-    ...mapState('enumItem', {
-      statusEnum: state => state.exam.examPaperAnswer.statusEnum,
-      statusTag: state => state.exam.examPaperAnswer.statusTag
-    }),
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      levelEnum: state => state.user.levelEnum,
-      examPaperTypeEnum: state => state.exam.examPaper.paperTypeEnum
-    }),
-    ...mapGetters('exam', ['subjectEnumFormat']),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

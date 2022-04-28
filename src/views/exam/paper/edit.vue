@@ -182,6 +182,15 @@ export default {
       currentTitleItem: null
     }
   },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionTypeEnum: state => state.exam.question.typeEnum,
+      paperTypeEnum: state => state.exam.examPaper.paperTypeEnum,
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   async created() {
     const id = this.$route.query.id
     const _this = this
@@ -344,15 +353,6 @@ export default {
     },
     ...mapActions('exam', { initSubject: 'initSubject' }),
     ...mapActions('tagsView', { delCurrentView: 'delCurrentView' })
-  },
-  computed: {
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      questionTypeEnum: state => state.exam.question.typeEnum,
-      paperTypeEnum: state => state.exam.examPaper.paperTypeEnum,
-      levelEnum: state => state.user.levelEnum
-    }),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

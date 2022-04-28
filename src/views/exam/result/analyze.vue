@@ -4,12 +4,12 @@
       <el-form :inline="true">
         <el-form-item label="选择班级：">
           <el-select v-model="queryParam.classId" placeholder="班级" style="width: 100px" @change="getClassPaper">
-            <el-option v-for="item in allClasses" :key="item.id" :value="item.id" :label="item.className"/>
+            <el-option v-for="item in allClasses" :key="item.id" :value="item.id" :label="item.className" />
           </el-select>
         </el-form-item>
         <el-form-item label="选择试卷">
           <el-select v-model="queryParam.paperId" placeholder="试卷" @change="getStudentResult">
-            <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id"/>
+            <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -18,7 +18,7 @@
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="shouldAttend" class-name="card-panel-icon"/>
+            <svg-icon icon-class="shouldAttend" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
@@ -36,20 +36,20 @@
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="attended" class-name="card-panel-icon"/>
+            <svg-icon icon-class="attended" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
               已参加人数
             </div>
-            <count-to :start-val="0" :end-val="statisticsInfo.attended" :duration="2600" class="card-panel-num"/>
+            <count-to :start-val="0" :end-val="statisticsInfo.attended" :duration="2600" class="card-panel-num" />
           </div>
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="unAttended" class-name="card-panel-icon"/>
+            <svg-icon icon-class="unAttended" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
@@ -59,27 +59,28 @@
               :start-val="0"
               :end-val="statisticsInfo.shouldAttend - statisticsInfo.attended"
               :duration="2600"
-              class="card-panel-num"/>
+              class="card-panel-num"
+            />
           </div>
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="passCount" class-name="card-panel-icon"/>
+            <svg-icon icon-class="passCount" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
               及格人数
             </div>
-            <count-to :start-val="0" :end-val="statisticsInfo.passCount" :duration="2600" class="card-panel-num"/>
+            <count-to :start-val="0" :end-val="statisticsInfo.passCount" :duration="2600" class="card-panel-num" />
           </div>
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="unPass" class-name="card-panel-icon"/>
+            <svg-icon icon-class="unPass" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
@@ -89,14 +90,15 @@
               :start-val="0"
               :end-val="statisticsInfo.attended - statisticsInfo.passCount"
               :duration="2600"
-              class="card-panel-num"/>
+              class="card-panel-num"
+            />
           </div>
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="maxScore" class-name="card-panel-icon"/>
+            <svg-icon icon-class="maxScore" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
@@ -106,14 +108,15 @@
               :start-val="statisticsInfo.maxScore"
               :end-val="statisticsInfo.maxScore"
               :duration="2600"
-              class="card-panel-num"/>
+              class="card-panel-num"
+            />
           </div>
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="minScore" class-name="card-panel-icon"/>
+            <svg-icon icon-class="minScore" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
@@ -123,14 +126,15 @@
               :start-val="statisticsInfo.minScore"
               :end-val="statisticsInfo.minScore"
               :duration="2600"
-              class="card-panel-num"/>
+              class="card-panel-num"
+            />
           </div>
         </div>
       </el-col>
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
-            <svg-icon icon-class="avgScore" class-name="card-panel-icon"/>
+            <svg-icon icon-class="avgScore" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
@@ -140,27 +144,28 @@
               :start-val="statisticsInfo.avgScore"
               :end-val="statisticsInfo.avgScore"
               :duration="2600"
-              class="card-panel-num"/>
+              class="card-panel-num"
+            />
           </div>
         </div>
       </el-col>
     </el-row>
     <el-table :hidden="showStudentResult" :data="studentResult" border fit highlight-current-row style="width: 100%;">
-      <el-table-column prop="userAccount" align="center" label="账号" width="200"/>
-      <el-table-column prop="userName" align="center" label="姓名" width="200"/>
+      <el-table-column prop="userAccount" align="center" label="账号" width="200" />
+      <el-table-column prop="userName" align="center" label="姓名" width="200" />
       <el-table-column align="center" label="提交时间" width="200">
         <template slot-scope="{row}">
           {{ row.createTime|formatDateTime }}
         </template>
       </el-table-column>
-      <el-table-column prop="doTime" align="center" label="答题时间" width="150"/>
+      <el-table-column prop="doTime" align="center" label="答题时间" width="150" />
       <el-table-column align="center" label="总分/及格分">
         <template slot-scope="{row}">
           {{ row.paperScore }}/{{ row.paperScore * 0.6 }}
         </template>
       </el-table-column>
-      <el-table-column prop="userScore" align="center" label="成绩"/>
-      <el-table-column prop="correctRate" align="center" label="正确率"/>
+      <el-table-column prop="userScore" align="center" label="成绩" />
+      <el-table-column prop="correctRate" align="center" label="正确率" />
       <el-table-column align="center" label="及格">
         <template slot-scope="{row}">
           <el-tag :type="passTagFormatter(row.isPass)">
@@ -168,7 +173,7 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="order" label="排名"/>
+      <el-table-column prop="order" label="排名" />
       <el-table-column label="操作">
         <template slot-scope="{row}">
           <router-link target="_blank" :to="{ path:'/exam/answer/read', query:{ id: row.id } }">
@@ -182,7 +187,8 @@
       :total="studentResultTotal"
       :page.sync="queryParam.page"
       :limit.sync="queryParam.limit"
-      @pagination="getStudentResult"/>
+      @pagination="getStudentResult"
+    />
   </div>
 </template>
 
@@ -238,7 +244,7 @@ export default {
   },
   async created() {
     const _this = this
-    _this.paperId = this.$route.query.id
+    _this.queryParam.paperId = this.$route.query.id
     await getClassList().then(re => {
       _this.allClasses = re.data
     })
@@ -268,7 +274,7 @@ export default {
     getStudentResult() {
       const _this = this
       getStudentResultPage(_this.queryParam).then(re => {
-        const {data} = re
+        const { data } = re
         _this.studentResult = data.list
         _this.studentResultTotal = data.total
         _this.studentResult.sort(this.compare('userScore'))

@@ -59,7 +59,7 @@
 import QuestionShow from '../components/Show'
 import Ueditor from '@/components/Ueditor'
 import { mapGetters, mapState, mapActions } from 'vuex'
-import { selectQuestion, updateQuestion, createQuestion, editQuestion } from '@/api/question'
+import { selectQuestion, editQuestion } from '@/api/question'
 
 export default {
   components: {
@@ -120,6 +120,14 @@ export default {
         loading: false
       }
     }
+  },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionTypeEnum: state => state.exam.question.typeEnum,
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapState('exam', { subjects: state => state.subjects })
   },
   created() {
     const id = this.$route.query.id
@@ -267,14 +275,6 @@ export default {
     },
     ...mapActions('exam', { initSubject: 'initSubject' }),
     ...mapActions('tagsView', { delCurrentView: 'delCurrentView' })
-  },
-  computed: {
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      questionTypeEnum: state => state.exam.question.typeEnum,
-      levelEnum: state => state.user.levelEnum
-    }),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

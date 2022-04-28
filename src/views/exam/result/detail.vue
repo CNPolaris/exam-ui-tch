@@ -3,7 +3,7 @@
     <el-row style="border-top-width: 10px">
       <el-col :span="2">
         <div class="card-panel-description">
-          <img :src="userInfo.avatar" style="height: 100px; width: 100px; border-radius: 40px"/>
+          <img :src="userInfo.avatar" style="height: 100px; width: 100px; border-radius: 40px" alt="头像">
         </div>
       </el-col>
       <el-col :span="2">
@@ -15,20 +15,20 @@
           <el-col :xs="6" :sm="6" :lg="4" class="card-panel-col">
             <div class="card-panel">
               <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="count" class-name="card-panel-icon"/>
+                <svg-icon icon-class="count" class-name="card-panel-icon" />
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
                   考试次数
                 </div>
-                <count-to :start-val="0" :end-val="attendCount" :duration="2600"></count-to>
+                <count-to :start-val="0" :end-val="attendCount" :duration="2600" />
               </div>
             </div>
           </el-col>
           <el-col :xs="6" :sm="6" :lg="4" class="card-panel-col">
             <div class="card-panel">
               <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="correctRate" class-name="card-panel-icon"/>
+                <svg-icon icon-class="correctRate" class-name="card-panel-icon" />
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
@@ -41,7 +41,7 @@
           <el-col :xs="6" :sm="6" :lg="4" class="card-panel-col">
             <div class="card-panel">
               <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="passRate" class-name="card-panel-icon"/>
+                <svg-icon icon-class="passRate" class-name="card-panel-icon" />
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
@@ -54,39 +54,39 @@
           <el-col :xs="6" :sm="6" :lg="4" class="card-panel-col">
             <div class="card-panel">
               <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="maxScore" class-name="card-panel-icon"/>
+                <svg-icon icon-class="maxScore" class-name="card-panel-icon" />
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
                   最高分
                 </div>
-                <count-to :start-val="maxScore" :end-val="maxScore" :duration="2600"></count-to>
+                <count-to :start-val="maxScore" :end-val="maxScore" :duration="2600" />
               </div>
             </div>
           </el-col>
           <el-col :xs="6" :sm="6" :lg="4" class="card-panel-col">
             <div class="card-panel">
               <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="minScore" class-name="card-panel-icon"/>
+                <svg-icon icon-class="minScore" class-name="card-panel-icon" />
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
                   最低分
                 </div>
-                <count-to :start-val="minScore" :end-val="minScore" :duration="2600"></count-to>
+                <count-to :start-val="minScore" :end-val="minScore" :duration="2600" />
               </div>
             </div>
           </el-col>
           <el-col :xs="6" :sm="6" :lg="4" class="card-panel-col">
             <div class="card-panel">
               <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="avgScore" class-name="card-panel-icon"/>
+                <svg-icon icon-class="avgScore" class-name="card-panel-icon" />
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
                   平均分
                 </div>
-                <count-to :start-val="avgScore" :end-val="avgScore" :duration="2600"></count-to>
+                <count-to :start-val="avgScore" :end-val="avgScore" :duration="2600" />
               </div>
             </div>
           </el-col>
@@ -96,7 +96,7 @@
     <el-row style="border-top-width: 10px">
       <el-col :span="12">
         <div class="chart-wrapper">
-          <score-line-chart :scoreLine="scoreLine"/>
+          <score-line-chart :scoreLine="scoreLine" />
         </div>
       </el-col>
       <el-col :span="12">
@@ -143,7 +143,7 @@ export default {
 
     if (id && parseInt(id) !== 0) {
       _this.id = id
-       getStudentInfo(_this.id).then(re => {
+      getStudentInfo(_this.id).then(re => {
         _this.userInfo = re.data
       })
       await _this.getAnswerList()
@@ -162,14 +162,14 @@ export default {
       const date = new Date(time)
       return formatDate(date, 'yyyy-MM-dd')
     },
-     async getAnswerList() {
+    async getAnswerList() {
       const _this = this
-       await getStudentAnswerList(_this.id).then(re => {
+      await getStudentAnswerList(_this.id).then(re => {
         if (re.code === 1000) {
           _this.answerList = null
         } else {
           _this.answerList = re.data
-           _this.statisticsData()
+          _this.statisticsData()
         }
       })
     },
@@ -196,7 +196,7 @@ export default {
       _this.passRate = Math.round(passCount / _this.answerList.length * 10000) / 100.00 + '%'
       _this.correctRate = Math.round(correctCount / questionCount * 10000) / 100.00 + '%'
       _this.attendCount = _this.answerList.length
-    },
+    }
     // scoreLineOption(title, value) {
     //   return {
     //     title: {

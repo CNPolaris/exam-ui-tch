@@ -95,6 +95,12 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('enumItem', {
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   created() {
     const _this = this
     const id = this.$route.query.id
@@ -171,12 +177,6 @@ export default {
       return isLt2M
     },
     ...mapActions('exam', { initSubject: 'initSubject' })
-  },
-  computed: {
-    ...mapState('enumItem', {
-      levelEnum: state => state.user.levelEnum
-    }),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

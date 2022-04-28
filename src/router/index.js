@@ -311,15 +311,14 @@ export const asyncRoutes = [
         path: '/exam/result/index',
         component: () => import('@/views/exam/result/index'),
         meta: {
-          title: '成绩分析'
-        },
-        hidden: true
+          title: '试卷分析'
+        }
       },
       {
         path: '/exam/result/analyze',
         component: () => import('@/views/exam/result/analyze'),
         meta: {
-          title: '试卷分析'
+          title: '成绩分析'
         }
       },
       {

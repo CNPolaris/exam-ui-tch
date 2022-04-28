@@ -65,7 +65,16 @@ export default {
       questionTypeEnum: [{ key: 1, value: '单选题' }, { key: 2, value: '多选题' }, { key: 3, value: '判断题' }, { key: 4, value: '填空题' }, { key: 5, value: '简答题' }]
     }
   },
-
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionType: state => state.exam.question.typeEnum,
+      editUrlEnum: state => state.exam.question.editUrlEnum,
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapGetters('exam', ['subjectEnumFormat']),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   created() {
     this.getList()
     this.initSubject()
@@ -134,16 +143,6 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
     ...mapActions('exam', { initSubject: 'initSubject' })
-  },
-  computed: {
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      questionType: state => state.exam.question.typeEnum,
-      editUrlEnum: state => state.exam.question.editUrlEnum,
-      levelEnum: state => state.user.levelEnum
-    }),
-    ...mapGetters('exam', ['subjectEnumFormat']),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

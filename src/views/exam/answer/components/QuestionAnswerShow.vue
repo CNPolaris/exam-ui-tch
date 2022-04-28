@@ -104,6 +104,13 @@ export default {
       default: 0
     }
   },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      doRightEnum: state => state.exam.question.answer.doRightEnum,
+      doRightTag: state => state.exam.question.answer.doRightTag
+    })
+  },
   methods: {
     trueFalseFormatter(question) {
       return question.items.filter(d => d.prefix === question.correct)[0].content
@@ -114,13 +121,6 @@ export default {
     doRightTextFormatter(status) {
       return this.enumFormat(this.doRightEnum, status)
     }
-  },
-  computed: {
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      doRightEnum: state => state.exam.question.answer.doRightEnum,
-      doRightTag: state => state.exam.question.answer.doRightTag
-    })
   }
 }
 </script>

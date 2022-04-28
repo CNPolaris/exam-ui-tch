@@ -79,6 +79,17 @@ export default {
       allClasses: []
     }
   },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionTypeEnum: state => state.exam.question.typeEnum,
+      paperTypeEnum: state => state.exam.examPaper.paperTypeEnum,
+      levelEnum: state => state.user.levelEnum,
+      examPaperTypeEnum: state => state.exam.examPaper.paperTypeEnum
+    }),
+    ...mapGetters('exam', ['subjectEnumFormat']),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   async created() {
     const _this = this
     this.queryParam.classId = this.$route.query.id
@@ -114,17 +125,6 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
     ...mapActions('exam', { initSubject: 'initSubject' })
-  },
-  computed: {
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      questionTypeEnum: state => state.exam.question.typeEnum,
-      paperTypeEnum: state => state.exam.examPaper.paperTypeEnum,
-      levelEnum: state => state.user.levelEnum,
-      examPaperTypeEnum: state => state.exam.examPaper.paperTypeEnum
-    }),
-    ...mapGetters('exam', ['subjectEnumFormat']),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>

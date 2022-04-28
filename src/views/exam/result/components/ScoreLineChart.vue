@@ -7,7 +7,7 @@ import echarts from 'echarts'
 require('echarts/theme/macarons')
 import resize from '../../../dashboard/components/mixins/resize'
 export default {
-  name: "ScoreLineChart",
+  name: 'ScoreLineChart',
   mixins: [resize],
   props: {
     className: {

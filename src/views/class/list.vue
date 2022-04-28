@@ -10,14 +10,14 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
-      <el-table-column prop="id" label="Id" width="90px" />
-      <el-table-column prop="className" label="班级名称" width="120px" />
-      <el-table-column prop="classCode" label="班级口令" width="320px" />
+    <el-table v-loading="listLoading" :data="list" fit highlight-current-row style="width: 100%">
+      <el-table-column prop="id" label="序号" width="100px" />
+      <el-table-column prop="className" label="班级名称" />
+      <el-table-column prop="classCode" label="班级口令" />
       <el-table-column prop="classCount" label="班级人数" width="100px" />
-      <el-table-column prop="createTime" label="创建时间" width="160px" :formatter="formatDateTime" />
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="{row,$index}">
+      <el-table-column prop="createTime" label="创建时间" :formatter="formatDateTime" />
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="$router.push({ path: '/class/student', query: { id: row.id}})">
             详情
           </el-button>
@@ -71,7 +71,7 @@
 <script>
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
-import { getClassPage, editClass, getStudentList } from '@/api/classes'
+import { getClassPage, editClass } from '@/api/classes'
 import { formatDate } from '@/utils/date'
 
 export default {
