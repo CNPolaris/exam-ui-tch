@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div>
+    <div ref="form">
       <header class="el-header align-center">
         <h1 align="center">{{ form.name }}</h1>
         <h5 align="center">建议时长:{{ form.suggestTime }}分钟 年级：{{ form.level|formatLevel }} 总分：{{ form.score }}</h5>
@@ -24,12 +24,13 @@
             </el-card>
           </el-form-item>
         </el-form>
-        <div align="center">
-          <el-button type="primary">打印</el-button>
-          <el-button type="danger" @click="$router.push('/exam/list')">取消</el-button>
-        </div>
       </main>
     </div>
+    <div align="center">
+      <el-button type="primary" @click="handlePrint">打印</el-button>
+      <el-button type="danger" @click="$router.push('/exam/list')">取消</el-button>
+    </div>
+
   </div>
 </template>
 
@@ -37,7 +38,7 @@
 import { selectExamPaper } from '@/api/exam'
 import QuestionShow from '../../question/components/Show'
 import { mapActions, mapGetters, mapState } from 'vuex'
-
+import printJS from 'print-js'
 export default {
   components: { QuestionShow },
   filters: {
@@ -110,6 +111,9 @@ export default {
     }
   },
   methods: {
+    handlePrint() {
+      this.$print(this.$refs.form)
+    },
     ...mapActions('exam', { initSubject: 'initSubject' })
   }
 }

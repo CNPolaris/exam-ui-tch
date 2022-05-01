@@ -104,6 +104,16 @@ export const constantRoutes = [
     path: '/profile/timeline',
     component: () => import('@/views/profile/components/Timeline'),
     hidden: true
+  },
+  {
+    path: '/exam/detail',
+    component: () => import('@/views/exam/paper/detail'),
+    name: 'ExamPaperDetail',
+    meta: {
+      title: '查看试卷',
+      roles: ['admin', 'teacher']
+    },
+    hidden: true
   }
 ]
 
@@ -229,16 +239,6 @@ export const asyncRoutes = [
           title: '创建试卷',
           roles: ['admin', 'teacher']
         }
-      },
-      {
-        path: '/exam/detail',
-        component: () => import('@/views/exam/paper/detail'),
-        name: 'ExamPaperDetail',
-        meta: {
-          title: '查看试卷',
-          roles: ['admin', 'teacher']
-        },
-        hidden: true
       }
     ]
   },
