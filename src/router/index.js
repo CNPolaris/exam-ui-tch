@@ -104,11 +104,6 @@ export const constantRoutes = [
     path: '/profile/timeline',
     component: () => import('@/views/profile/components/Timeline'),
     hidden: true
-  },
-  {
-    path: '/class/student',
-    component: () => import('@/views/class/studentList'),
-    hidden: true
   }
 ]
 
@@ -133,6 +128,11 @@ export const asyncRoutes = [
           title: '班级列表',
           roles: ['admin', 'teacher']
         }
+      },
+      {
+        path: '/class/student',
+        component: () => import('@/views/class/studentList'),
+        hidden: true
       }
     ]
   },

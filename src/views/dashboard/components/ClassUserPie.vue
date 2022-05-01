@@ -10,12 +10,17 @@ export default {
   mixins: [resize],
   props: {
     form: {
-      examPaperCount: 0,
-      questionCount: 0,
-      classCount: 0,
-      studentCount: 0,
-      classPaperPie: [],
-      classUserPie: []
+      type: Object,
+      default: () => {
+        return {
+          examPaperCount: 0,
+          questionCount: 0,
+          classCount: 0,
+          studentCount: 0,
+          classPaperPie: [],
+          classUserPie: []
+        }
+      }
     },
     className: {
       type: String,

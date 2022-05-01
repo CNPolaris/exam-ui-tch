@@ -96,11 +96,10 @@
     <el-row style="border-top-width: 10px">
       <el-col :span="12">
         <div class="chart-wrapper">
-          <score-line-chart :scoreLine="scoreLine" />
+          <score-line-chart :score-line="scoreLine" />
         </div>
       </el-col>
-      <el-col :span="12">
-      </el-col>
+      <el-col :span="12" />
     </el-row>
   </div>
 </template>

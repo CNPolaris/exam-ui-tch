@@ -1,14 +1,10 @@
 <template>
   <div class="app-container">
-    <el-button @click="back">返回</el-button>
+    <!--    <el-button @click="back">返回</el-button>-->
     <el-table :key="tableKey" v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%;">
-      <el-table-column label="编号" prop="id" sortable="custom" align="center" width="80">
-        <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column align="center" label="真实姓名" width="140">
+      <el-table-column label="编号" prop="id" sortable="custom" align="center" width="80" />
+      <el-table-column label="账号" prop="userName" align="center" width="250" />
+      <el-table-column align="center" label="真实姓名" width="200">
         <template slot-scope="{row}">
           <span>{{ row.realName }}</span>
         </template>
@@ -20,24 +16,28 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="电话" width="140">
+      <el-table-column align="center" label="电话" width="200">
         <template slot-scope="{row}">
           <span>{{ row.phone }}</span>
         </template>
       </el-table-column>
-
-      <el-table-column align="center" label="注册时间" width="180">
+      <el-table-column align="center" label="出生日期" width="200">
+        <template slot-scope="{row}">
+          <span>{{ row.birthDay|formatBirthDay }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="注册时间" width="250">
         <template slot-scope="{row}">
           <span>{{ row.createTime|formatDateTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="最后一次登录时间" width="180">
+      <el-table-column align="center" label="最后一次登录时间" width="250">
         <template slot-scope="{row}">
           <span>{{ row.lastActiveTime|formatDateTime }}</span>
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: center" @pagination="getList" />
   </div>
 </template>
 
@@ -57,6 +57,13 @@ export default {
       }
       const date = new Date(time)
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
+    },
+    formatBirthDay(time) {
+      if (time == null || time === '') {
+        return 'N/A'
+      }
+      const date = new Date(time)
+      return formatDate(date, 'yyyy-MM-dd')
     },
     statusFormat(status) {
       if (status === 1) {

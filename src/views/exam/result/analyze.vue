@@ -252,7 +252,6 @@ export default {
       _this.queryParam.classId = _this.allClasses[0].id
       await _this.getClassPaper()
       if (_this.classPaper.length > 0) {
-        _this.queryParam.paperId = _this.classPaper[0].id
         _this.getStudentResult()
       }
     }

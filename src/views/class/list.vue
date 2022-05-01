@@ -19,7 +19,7 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="$router.push({ path: '/class/student', query: { id: row.id}})">
-            详情
+            学生名单
           </el-button>
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             编辑
@@ -31,7 +31,7 @@
       </el-table-column>
 
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" style="text-align: center" @pagination="getList" />
 
     <el-dialog :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
