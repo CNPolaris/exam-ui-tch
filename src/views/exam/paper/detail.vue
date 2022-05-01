@@ -38,7 +38,6 @@
 import { selectExamPaper } from '@/api/exam'
 import QuestionShow from '../../question/components/Show'
 import { mapActions, mapGetters, mapState } from 'vuex'
-import printJS from 'print-js'
 export default {
   components: { QuestionShow },
   filters: {
