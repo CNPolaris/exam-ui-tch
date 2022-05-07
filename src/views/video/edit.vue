@@ -40,13 +40,14 @@
         </el-upload>
         <video controls :src="query.url" width="200" />
       </el-form-item>
-      <el-form-item label="标签" prop="tags">
+      <el-form-item label="标签(最多5个)" prop="tags">
         <el-tag v-for="item in tags" :key="item" closable :disable-transitions="false" @close="handleClose(item)">
           {{ item }}
         </el-tag>
         <el-input
           ref="saveTagInput"
           v-model="tag"
+          :disabled="tagCount<=0"
           class="input-new-tag"
           size="small"
           @keyup.enter.native="handleInputConfirm"
@@ -70,6 +71,7 @@ export default {
     return {
       tag: '',
       tags: [],
+      tagCount: 5,
       query: {
         name: null,
         level: null,
@@ -119,11 +121,15 @@ export default {
   methods: {
     handleClose(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1)
+      this.tagCount++
     },
     handleInputConfirm() {
       const tag = this.tag
       if (tag) {
-        this.tags.push(tag)
+        if (this.tags.length <= 5) {
+          this.tags.push(tag)
+          this.tagCount--
+        }
       }
       this.tag = ''
     },

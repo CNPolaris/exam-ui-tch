@@ -26,15 +26,19 @@
       <el-table-column prop="subjectId" label="学科" :formatter="subjectFormatter" align="center" width="120px" />
       <el-table-column label="标签" prop="tags" align="center" width="430px">
         <template slot-scope="{row}">
-          <el-tag v-for="item in row.tags" :key="item">
-            {{ item }}
-          </el-tag>
+          <!--          <el-tag v-for="item in row.tags" :key="item">-->
+          <!--            {{ item }}-->
+          <!--          </el-tag>-->
+          <!--          {{ row.tags }}-->
+          <span v-for="(item,index) in row.tags" :key="index">
+            <el-tag>{{ item }}</el-tag>
+          </span>
         </template>
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间" :formatter="formatDateTime" align="center" width="226px" />
       <el-table-column label="操作" align="center" width="326" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="$router.push({ path:'/video/edit', query:{ id:row.id, isUpdate: 1 }})">编辑</el-button>
+          <el-button type="primary" size="mini" @click="$router.push({ path:'/video/edit', query:{ id:row.id }})">编辑</el-button>
           <el-button type="primary" size="mini" @click="$router.push({ path: '/video/preview', query:{ id: row.id }})">预览</el-button>
           <el-popconfirm
             v-model="visible"
@@ -48,7 +52,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" style="text-align: center" @pagination="getList" />
   </div>
 </template>
 
