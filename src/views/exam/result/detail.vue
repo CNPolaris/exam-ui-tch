@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="dashboard-container">
     <el-row style="border-top-width: 10px">
       <el-col :span="2">
         <div class="card-panel-description">
@@ -94,7 +94,7 @@
       </el-col>
     </el-row>
     <el-row style="border-top-width: 10px">
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
           <score-line-chart :score-line="scoreLine" />
         </div>

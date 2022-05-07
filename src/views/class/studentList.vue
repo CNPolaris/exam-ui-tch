@@ -36,6 +36,13 @@
           <span>{{ row.lastActiveTime|formatDateTime }}</span>
         </template>
       </el-table-column>
+      <el-table-column align="center" label="操作">
+        <template slot-scope="{row}">
+          <router-link target="_blank" :to="{path: '/exam/student/detail', query: {id: row.id}}">
+            <el-button type="text" size="small">查看成绩分析</el-button>
+          </router-link>
+        </template>
+      </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: center" @pagination="getList" />
   </div>

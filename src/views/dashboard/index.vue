@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <el-row :gutter="40" class="panel-group">
+    <el-row :gutter="20" class="panel-group">
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-people">
@@ -54,11 +54,11 @@
         </div>
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div id="echarts-class-pie" v-loading="loading" class="chart-wrapper" style="width: 100%;height:400px;" />
       </el-col>
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div id="echarts-paper-pie" v-loading="loading" class="chart-wrapper" style="width: 100%;height:400px;" />
       </el-col>
     </el-row>

@@ -14,7 +14,7 @@
         </el-form-item>
       </el-form>
     </el-row>
-    <el-row :gutter="40" class="panel-group" :hidden="showStudentResult">
+    <el-row :gutter="20" class="panel-group" :hidden="showStudentResult">
       <el-col :xs="6" :sm="6" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper">
@@ -187,6 +187,7 @@
       :total="studentResultTotal"
       :page.sync="queryParam.page"
       :limit.sync="queryParam.limit"
+      style="text-align: center"
       @pagination="getStudentResult"
     />
   </div>
