@@ -14,6 +14,7 @@
       <el-table-column prop="id" label="序号" width="100px" />
       <el-table-column prop="className" label="班级名称" />
       <el-table-column prop="classCode" label="班级口令" />
+      <el-table-column prop="level" label="年级" :formatter="levelFormatter" />
       <el-table-column prop="classCount" label="班级人数" width="100px" />
       <el-table-column prop="createTime" label="创建时间" :formatter="formatDateTime" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -41,6 +42,11 @@
         <el-form-item label="班级名称" prop="className" label-width="140">
           <el-input v-model="temp.className" />
         </el-form-item>
+        <el-table-column label="年级" prop="level" label-width="140">
+          <el-select v-model="temp.level">
+            <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value"/>
+          </el-select>
+        </el-table-column>
         <el-form-item label="班级人数" prop="classCount" label-width="140">
           <a>{{ temp.classCount }}</a>
         </el-form-item>
@@ -69,6 +75,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { getClassPage, editClass } from '@/api/classes'
@@ -99,6 +106,12 @@ export default {
       dialogFormVisible: false,
       detailDialogVisible: false
     }
+  },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      levelEnum: state => state.user.levelEnum
+    })
   },
   created() {
     this.getList()
@@ -174,6 +187,9 @@ export default {
         case 0:
           return '女'
       }
+    },
+    levelFormatter(row, column, cellValue, index) {
+      return this.enumFormat(this.levelEnum, cellValue)
     }
   }
 

@@ -48,7 +48,7 @@
           <!--            编辑-->
           <!--          </el-button>-->
           <el-button size="mini" @click="$router.push({ path:'/exam/detail', query:{ id:row.id}})">查看</el-button>
-          <el-button size="mini" @click="$router.push({ path:'/exam/edit', query:{ id:row.id, isUpdate: 1 }})">编辑</el-button>
+          <el-button size="mini" @click="$router.push({ path:'/exam/edit', query:{ id:row.id }})">编辑</el-button>
           <el-popconfirm
             v-model="visible"
             placement="top"
@@ -62,7 +62,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" style="text-align: center" @pagination="getList" />
 
     <!--    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">-->
     <!--      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">-->
