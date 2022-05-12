@@ -7,9 +7,9 @@
             <el-option v-for="item in classes" :key="item.id" :label="item.className" :value="item.id" />
           </el-select>
         </el-form-item>
-        <el-form-item label="试卷" prop="paperId" :hidden="showVisible">
-          <el-select v-model="queryParam.paperId" placeholder="学科">
-            <el-option v-for="item in classPaper" :key="item.id" :label="item.name" :value="item.id" />
+        <el-form-item label="学科" prop="paperId" :hidden="showVisible">
+          <el-select v-model="queryParam.subjectId" placeholder="学科">
+            <el-option v-for="item in subjects" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
         <el-form-item>

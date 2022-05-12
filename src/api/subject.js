@@ -79,7 +79,7 @@ export function selectSubject(id) {
 
 export function allSubjectList() {
   return request({
-    url: '/admin/subject/all',
+    url: '/admin/subject/teacher/all',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
