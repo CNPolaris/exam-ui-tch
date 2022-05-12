@@ -1,17 +1,17 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :model="keyQuery" :inline="true">
+      <el-form :model="listQuery" :inline="true">
         <el-form-item label="试卷ID:">
-          <el-input v-model="keyQuery.id" placeholder="试卷ID" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.id" placeholder="试卷ID" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
         </el-form-item>
         <el-form-item label="年级" prop="level">
-          <el-select v-model="keyQuery.level" placeholder="年级" clearable @change="levelChange">
+          <el-select v-model="listQuery.level" placeholder="年级" clearable @change="levelChange">
             <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="学科" prop="subjectId">
-          <el-select v-model="keyQuery.subjectId" style="width: 100px">
+          <el-select v-model="listQuery.subjectId" style="width: 100px">
             <el-option v-for="item in subjects" :key="item.id" :label="item.name+' ( '+item.levelName+' )'" :value="item.id" />
           </el-select>
         </el-form-item>
@@ -32,7 +32,7 @@
 
       <el-table-column prop="name" align="center" label="名称" width="267" />
 
-      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="200" />
+      <el-table-column prop="gradeLevel" :formatter="levelFormatter" align="center" label="年级" width="200" />
 
       <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="300" />
 
@@ -102,7 +102,7 @@
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { formatDate } from '@/utils/date'
-import { getExamPaperList, updateExamPaperStatus, deleteExamPaper, updateExamPaper } from '@/api/exam'
+import { getTeacherPaperList, updateExamPaperStatus, deleteExamPaper, updateExamPaper } from '@/api/exam'
 import { getSubjectName } from '@/api/subject'
 
 const { mapActions, mapGetters, mapState } = require('vuex')
@@ -119,7 +119,9 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 15
+        limit: 15,
+        level: null,
+        subjectId: null
       },
       keyQuery: {
         id: undefined,
@@ -157,9 +159,9 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      getExamPaperList(this.listQuery).then(response => {
+      getTeacherPaperList(this.listQuery).then(response => {
         const { data } = response
-        this.list = data.data
+        this.list = data.list
         this.total = data.total
         setTimeout(() => {
           this.listLoading = false

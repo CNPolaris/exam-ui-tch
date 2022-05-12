@@ -48,11 +48,11 @@
               <!--              <router-link v-if="row.status === 0 " target="_blank" :to="{path:'/exam/answer/edit',query:{id:row.id}}">-->
               <!--                <el-button type="text" size="small">批改</el-button>-->
               <!--              </router-link>-->
-              <!--              <router-link v-if="row.status === 1 " target="_blank" :to="{path:'/exam/answer/read',query:{id:row.id}}">-->
-              <!--                <el-button type="text" size="small">查看试卷</el-button>-->
-              <!--              </router-link>-->
+              <router-link v-if="row.status === 1 " target="_blank" :to="{path:'/exam/answer/read',query:{id:row.id}}">
+                <el-button type="text" size="small">查看试卷</el-button>
+              </router-link>
               <!--              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/edit',query:{id:row.id}})">批改</el-button>-->
-              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/read',query:{id:row.id}})">查看试卷</el-button>
+              <!--              <el-button type="primary" size="small" @click="$router.push({path:'/exam/answer/read',query:{id:row.id}})">查看试卷</el-button>-->
             </template>
           </el-table-column>
         </el-table>

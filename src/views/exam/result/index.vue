@@ -30,7 +30,7 @@
 
       <el-table-column prop="name" align="center" label="名称" width="260" />
 
-      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="210" />
+      <el-table-column prop="gradeLevel" :formatter="levelFormatter" align="center" label="年级" width="210" />
 
       <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="210" />
 

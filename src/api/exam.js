@@ -12,6 +12,18 @@ export function getExamPaperList(query) {
   })
 }
 
+export function getTeacherPaperList(data) {
+  return request({
+    url: '/teacher/exam/list',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    data: data
+  })
+}
+
 export function updateExamPaperStatus(id, status) {
   return request({
     url: '/exam/status/' + id,
