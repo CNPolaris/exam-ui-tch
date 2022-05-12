@@ -32,17 +32,17 @@
 
       <el-table-column prop="name" align="center" label="名称" width="267" />
 
-      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="353" />
+      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="200" />
 
-      <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="353" />
+      <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="300" />
 
-      <el-table-column prop="paperType" :formatter="examPaperTypeFormatter" align="center" label="试卷类型" width="397" />
+      <el-table-column prop="paperType" :formatter="examPaperTypeFormatter" align="center" label="试卷类型" width="200" />
 
-      <el-table-column prop="createUser" align="center" label="创建者" width="353" />
+      <el-table-column prop="createUser" align="center" label="创建者" width="200" />
 
-      <el-table-column prop="createTime" :formatter="formatDateTime" align="center" label="创建时间" width="353" />
+      <el-table-column prop="createTime" :formatter="formatDateTime" align="center" label="创建时间" width="300" />
 
-      <el-table-column label="操作" align="center" width="273" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="300" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <!--          <el-button type="primary" size="mini" @click="handleUpdate(row)">-->
           <!--            编辑-->
