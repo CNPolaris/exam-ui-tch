@@ -97,6 +97,7 @@ export default {
     _this.echartsClassUserAction = echarts.init(document.getElementById('echarts-class-pie'), 'macarons')
     _this.echartsClassPaperAction = echarts.init(document.getElementById('echarts-paper-pie'), 'macarons')
     _this.loading = true
+
     dashInfo().then(re => {
       _this.form.classCount = re.data.classCount
       _this.form.studentCount = re.data.studentCount

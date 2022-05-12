@@ -6,7 +6,9 @@ const state = {
   token: getToken(),
   name: '',
   avatar: '',
-  roles: []
+  roles: [],
+  classes: [],
+  subjectIds: []
 }
 
 const mutations = {
@@ -24,6 +26,12 @@ const mutations = {
   },
   SET_ROLEID: (state, roleId) => {
     state.roleId = roleId
+  },
+  SET_CLASSES: (state, classes) => {
+    state.classes = classes
+  },
+  SET_SUBJECTIDS: (state, subjectIds) => {
+    state.subjectIds = subjectIds
   }
 }
 
@@ -51,11 +59,13 @@ const actions = {
           reject('验证数据失败，请重新登录')
         }
         const { data } = response
-        const { roles, username, avatar, roleId } = data
+        const { roles, username, avatar, roleId, classes, subjectIds } = data
         commit('SET_ROLES', roles)
         commit('SET_ROLEID', roleId)
         commit('SET_NAME', username)
         commit('SET_AVATAR', avatar)
+        commit('SET_CLASSES', classes)
+        commit('SET_SUBJECTIDS', subjectIds)
         resolve(data)
       }).catch(error => {
         reject(error)
