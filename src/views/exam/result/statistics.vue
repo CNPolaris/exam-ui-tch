@@ -20,7 +20,7 @@
       <el-table-column prop="passRate" label="及格率" align="center" />
       <el-table-column prop="maxScore" label="最高分" align="center" />
       <el-table-column prop="minScore" label="最低分" align="center" />
-      <el-table-column prop="avgScore" label="平均分" align="center" />
+      <el-table-column prop="avgScore" label="平均分" align="center" :formatter="avgScoreFormatter" />
       <el-table-column label="操作" align="center">
         <template slot-scope="{row}">
           <router-link
@@ -124,6 +124,9 @@ export default {
           return v[j]
         }
       }))
+    },
+    avgScoreFormatter(row, column, event) {
+      return row.avgScore.toFixed(2)
     }
   }
 }
