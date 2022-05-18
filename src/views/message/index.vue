@@ -1,73 +1,95 @@
 <template>
-  <div class="app-container">
-    <el-form ref="queryForm" :model="queryParam" :inline="true">
-      <el-form-item label="接收者用户名：">
-        <el-input v-model="queryParam.sendUserName" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm">查询</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
-      <el-table-column prop="id" label="Id" width="100" />
-      <el-table-column prop="title" label="标题" show-overflow-tooltip />
-      <el-table-column prop="content" label="内容" show-overflow-tooltip />
-      <el-table-column prop="sendUserName" label="发送人" width="100" />
-      <el-table-column prop="receives" label="接收人" show-overflow-tooltip />
-      <el-table-column prop="readCount" label="已读数" width="70" />
-      <el-table-column prop="receiveUserCount" label="接收人数" width="100" />
-      <el-table-column prop="createTime" label="创建时间" width="160px" />
-    </el-table>
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParam.page"
-      :limit.sync="queryParam.limit"
-      @pagination="getList"
-    />
+  <div class="message-container">
+    <el-collapse v-for="(item, index) in list" :key="index" @change="handleRead(item)">
+      <el-collapse-item>
+        <template slot="title">
+          {{ item.title }}
+          <el-tag :type="statusTagFormatter(item.readed)">
+            {{ statusFormatter(item.readed) }}
+          </el-tag>
+        </template>
+        <div>发送人：{{ item.sendUserName }}</div>
+        <div>内容：{{ item.content }}</div>
+        <div>发送时间：{{ item.createTime|formatDateTime }}</div>
+      </el-collapse-item>
+    </el-collapse>
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: center" @pagination="getMessage" />
   </div>
 </template>
 
 <script>
-
 import Pagination from '@/components/Pagination'
-import waves from '@/directive/waves'
-import { getReceiveMessageList } from '@/api/message'
+import { getMessageList, readMessage } from '@/api/message'
+import { formatDate } from '@/utils/date'
 
 export default {
+  name: 'MessageIndex',
   components: { Pagination },
-  directives: { waves },
-
+  filters: {
+    formatDateTime(time) {
+      if (time == null || time === '') {
+        return 'N/A'
+      }
+      const date = new Date(time)
+      return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
+    }
+  },
   data() {
     return {
-      listLoading: true,
-      list: null,
+      list: [],
       total: 0,
       queryParam: {
         page: 1,
-        limit: 10,
-        sendUserName: ''
+        limit: 15,
+        sendUser: null
       }
     }
   },
   created() {
-    this.getList()
+    this.getMessage()
   },
   methods: {
-    getList() {
-      this.listLoading = true
-      getReceiveMessageList(this.queryParam).then(response => {
-        const { data } = response
-        this.list = data.list
-        this.total = data.total
-        this.listLoading = false
+    getMessage() {
+      const _this = this
+      getMessageList(this.queryParam).then(re => {
+        _this.list = re.data.list
+        _this.total = re.data.total
       })
     },
-    submitForm() {
-      this.queryParam.pageIndex = 1
-      this.search()
+    handleRead(item) {
+      if (item.readed === false) {
+        readMessage(item.id).then(re => {
+          if (re.code === 2000) {
+            this.$message({
+              message: re.message,
+              type: 'success'
+            })
+          }
+          this.getMessage()
+        })
+      }
+    },
+    statusTagFormatter(status) {
+      if (status) {
+        return 'success'
+      } else {
+        return 'warning'
+      }
+    },
+    statusFormatter(status) {
+      if (status) {
+        return '已读'
+      } else {
+        return '未读'
+      }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.message-container {
+  padding: 32px;
+  background-color: #fdfaf3;
+}
+</style>

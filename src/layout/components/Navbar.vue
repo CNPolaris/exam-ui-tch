@@ -24,11 +24,19 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
+          <router-link to="/">
+            <el-dropdown-item>首页</el-dropdown-item>
+          </router-link>
           <router-link to="/profile/index">
             <el-dropdown-item>用户详情</el-dropdown-item>
           </router-link>
-          <router-link to="/">
-            <el-dropdown-item>首页</el-dropdown-item>
+          <router-link to="/message/index">
+            <el-dropdown-item>
+              <el-badge v-if="messageCount!==0" :value="messageCount">
+                <span>消息中心</span>
+              </el-badge>
+              <span v-if="messageCount===0">消息中心</span>
+            </el-dropdown-item>
           </router-link>
           <!--          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">-->
           <!--            <el-dropdown-item>Github</el-dropdown-item>-->
@@ -53,6 +61,7 @@ import Hamburger from '@/components/Hamburger'
 // import Screenfull from '@/components/Screenfull'
 // import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
+import { getMessageCount } from '@/api/message'
 
 export default {
   components: {
@@ -63,12 +72,22 @@ export default {
     // SizeSelect,
     Search
   },
+  data() {
+    return {
+      messageCount: 0
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
       'avatar',
       'device'
     ])
+  },
+  created() {
+    getMessageCount().then(re => {
+      this.messageCount = re.data
+    })
   },
   methods: {
     toggleSideBar() {

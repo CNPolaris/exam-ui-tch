@@ -97,6 +97,14 @@ export const constantRoutes = [
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: '个人详情', icon: 'user', noCache: true }
+      },
+      {
+        path: '/message/index',
+        name: 'MessageIndex',
+        component: () => import('@/views/message/index'),
+        meta: {
+          title: '消息中心'
+        }
       }
     ]
   },
@@ -380,7 +388,7 @@ export const asyncRoutes = [
     children: [
       {
         path: '/message/list',
-        component: () => import('@/views/message/index'),
+        component: () => import('@/views/message/list'),
         name: 'MessageList',
         meta: {
           title: '消息列表',

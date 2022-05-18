@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">教师端登陆</h3>
+        <h3 class="title">教师端登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -45,6 +45,7 @@
         </el-form-item>
       </el-tooltip>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button type="text" size="small" @click="open">忘记密码？</el-button>
     </el-form>
 
     <el-dialog title="Or connect with" :visible.sync="showDialog">
@@ -163,6 +164,17 @@ export default {
         }
         return acc
       }, {})
+    },
+    open() {
+      this.$alert('忘记密码请及时联系学校管理员', '忘记密码', {
+        confirmButtonText: '确定'
+        // callback: action => {
+        //   this.$message({
+        //     type: 'info',
+        //     message: ''
+        //   })
+        // }
+      })
     }
     // afterQRScan() {
     //   if (e.key === 'x-admin-oauth-code') {
