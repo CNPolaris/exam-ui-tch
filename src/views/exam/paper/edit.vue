@@ -84,8 +84,23 @@
             <el-option v-for="item in questionTypeEnum" :key="item.key" :value="item.key" :label="item.value" />
           </el-select>
         </el-form-item>
+        <el-form-item label="难度">
+          <el-select v-model="questionPage.queryParam.difficult" clearable>
+            <el-option v-for="item in difficultScore" :key="item" :value="item" :label="item" />
+          </el-select>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="queryForm">查询</el-button>
+        </el-form-item>
+        <el-form-item>
+          <span>
+            题目数量：{{ questionCount }}
+          </span>
+        </el-form-item>
+        <el-form-item>
+          <span>
+            难度系数：{{ difficult }}
+          </span>
         </el-form-item>
       </el-form>
       <el-table
@@ -101,6 +116,7 @@
         <el-table-column prop="id" label="Id" width="60px" />
         <el-table-column prop="questionType" label="题型" :formatter="questionTypeFormatter" width="70px" />
         <el-table-column prop="shortTitle" label="题干" show-overflow-tooltip />
+        <el-table-column prop="difficult" label="难度" />
       </el-table>
       <pagination
         v-show="questionPage.total>0"
@@ -141,6 +157,7 @@ export default {
         titleItems: [],
         classes: []
       },
+      difficultScore: [1, 2, 3, 4, 5],
       allClasses: [],
       pageQuery: {
         page: 1,
@@ -173,13 +190,16 @@ export default {
           questionType: null,
           subjectId: 1,
           pageIndex: 1,
-          pageSize: 5
+          pageSize: 5,
+          difficult: null
         },
         listLoading: true,
         tableData: [],
         total: 0
       },
-      currentTitleItem: null
+      currentTitleItem: null,
+      difficult: 0,
+      questionCount: 0
     }
   },
   computed: {
@@ -203,7 +223,6 @@ export default {
         _this.allClasses[i].checked = false
       }
     })
-    console.log(_this.allClasses)
     if (id && parseInt(id) !== 0) {
       _this.formLoading = true
       await selectExamPaper(id).then(re => {
@@ -325,6 +344,11 @@ export default {
     },
     handleSelectionChange(val) {
       this.questionPage.multipleSelection = val
+      for (let i =0; i < val.length; i++) {
+        this.difficult = this.difficult + val[i].difficult
+      }
+      this.difficult = (this.difficult / val.length).toFixed(2)
+      this.questionCount = val.length
     },
     handleBack() {
       this.form = {}
