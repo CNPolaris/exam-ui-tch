@@ -247,6 +247,14 @@ export const asyncRoutes = [
           title: '创建试卷',
           roles: ['admin', 'teacher']
         }
+      },
+      {
+        path: '/exam/smart',
+        component: () => import('@/views/exam/paper/smart'),
+        name: 'Smart',
+        meta: {
+          title: '智能组卷'
+        }
       }
     ]
   },

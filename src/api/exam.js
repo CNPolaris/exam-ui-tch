@@ -142,3 +142,14 @@ export function getResultPaper(data) {
     data: data
   })
 }
+
+export function createSmartPaper(data) {
+  return request({
+    url: '/teacher/exam/create/ai',
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'post',
+    data: data
+  })
+}
